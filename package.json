@@ -1,0 +1,29 @@
+{
+  "name": "servernode",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/li-code01/serverNode.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/li-code01/serverNode/issues"
+  },
+  "homepage": "https://github.com/li-code01/serverNode#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4",
+    "mongodb": "^4.1.0",
+    "mongoose": "^6.5.1",
+    "querystring": "^0.2.1",
+    "request": "^2.88.2"
+  }
+}
