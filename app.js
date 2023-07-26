@@ -16,6 +16,9 @@ const recordWeight = require('./src/calories/recordWeight')
 const getSpend = require('./src/cost/getSpend')
 const userLoginAi = require('./src/access/getAccess')
 const talkAi = require('./src/access/talk')
+const addBirthdayRecord = require('./src/birthday/addBirthdayRecord')
+const deleteBirthdayRecord = require('./src/birthday/deleteBirthdayRecord')
+const editBirthdayRecord = require('./src/birthday/editBirthdayRecord')
 // 1. 调用 express() 得到一个 app
 const app = express()
 app.all('*', function (req, res, next) {
@@ -48,6 +51,12 @@ app.get('/getCaloriesInfo', getCaloriesInfo)
 app.post('/addCaloriesRecord', addCaloriesRecord)
 //获取生日列表
 app.get('/birthday', birthday)
+//添加生日记录
+app.post('/addBirthdayRecord', addBirthdayRecord)
+//修改生日记录
+app.post('/editBirthdayRecord', editBirthdayRecord)
+//删除生日记录
+app.get('/deleteBirthdayRecord', deleteBirthdayRecord)
 //记录体重
 app.get('/recordWeight', recordWeight)
 //获取每日开销
