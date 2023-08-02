@@ -18,7 +18,8 @@
   },
   "homepage": "https://github.com/li-code01/serverNode#readme",
   "dependencies": {
-    "express": "^4.18.1",
+    "express": "^4.18.2",
+    "express-fileupload": "^1.4.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "mongodb": "^4.1.0",

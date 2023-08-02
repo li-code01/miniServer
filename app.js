@@ -2,6 +2,7 @@
 const https = require('https');
 const fs = require('fs');
 const express = require('express')
+const fileUpload = require('express-fileupload');
 const getList = require('./src/expire/getList')
 const addExpire = require('./src/expire/add')
 const deleteProduct = require('./src/expire/deleteProduct')
@@ -19,6 +20,7 @@ const talkAi = require('./src/access/talk')
 const addBirthdayRecord = require('./src/birthday/addBirthdayRecord')
 const deleteBirthdayRecord = require('./src/birthday/deleteBirthdayRecord')
 const editBirthdayRecord = require('./src/birthday/editBirthdayRecord')
+const upload = require('./src/upload/upload')
 // 1. 调用 express() 得到一个 app
 const app = express()
 app.all('*', function (req, res, next) {
@@ -31,6 +33,8 @@ app.all('*', function (req, res, next) {
     res.header("Access-Control-Allow-Methods", "*");
     next();
 })
+// 使用 express-fileupload 中间件
+app.use( fileUpload() );
 //wx登录
 app.get('/wxLogin', wxLogin)
 //获取列表
@@ -63,6 +67,8 @@ app.get('/recordWeight', recordWeight)
 app.get('/getSpend', getSpend)
 //AI对话账户登陆
 app.get('/userLoginAi', userLoginAi)
+//上传文件
+app.post('/upload', upload)
 //AI对话
 app.post('/talkAi', talkAi)
 const opt = {
