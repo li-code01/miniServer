@@ -21,6 +21,7 @@ const addBirthdayRecord = require('./src/birthday/addBirthdayRecord')
 const deleteBirthdayRecord = require('./src/birthday/deleteBirthdayRecord')
 const editBirthdayRecord = require('./src/birthday/editBirthdayRecord')
 const upload = require('./src/upload/upload')
+const monthRecord = require('./src/cost/monthRecord')
 // 1. 调用 express() 得到一个 app
 const app = express()
 app.all('*', function (req, res, next) {
@@ -71,6 +72,8 @@ app.get('/userLoginAi', userLoginAi)
 app.post('/upload', upload)
 //AI对话
 app.post('/talkAi', talkAi)
+//消费记录
+app.post('/monthRecord', monthRecord)
 const opt = {
     key: fs.readFileSync('./certs/liaixi.icu.key'),
     cert:  fs.readFileSync('./certs/liaixi.icu_bundle.crt')
