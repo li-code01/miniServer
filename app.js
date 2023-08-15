@@ -6,7 +6,7 @@ const fileUpload = require('express-fileupload');
 const getList = require('./src/expire/getList')
 const addExpire = require('./src/expire/add')
 const deleteProduct = require('./src/expire/deleteProduct')
-const getAllMonthCost = require('./src/cost/getAllMonthCost')
+const getCostList = require('./src/cost/getCostList')
 const getIndexImg = require('./src/file/getIndexImg')
 const getGameInfo = require('./src/game/getGameInfo')
 const getCaloriesInfo = require('./src/calories/getCaloriesInfo')
@@ -22,6 +22,7 @@ const deleteBirthdayRecord = require('./src/birthday/deleteBirthdayRecord')
 const editBirthdayRecord = require('./src/birthday/editBirthdayRecord')
 const upload = require('./src/upload/upload')
 const monthRecord = require('./src/cost/monthRecord')
+const signIn = require('./src/daySign/signIn')
 // 1. 调用 express() 得到一个 app
 const app = express()
 app.all('*', function (req, res, next) {
@@ -45,7 +46,7 @@ app.post('/addExpire', addExpire)
 //添加到期商品
 app.get('/deleteProduct', deleteProduct)
 //获取所有月份支出
-app.get('/getAllMonthCost', getAllMonthCost)
+app.get('/getCostList', getCostList)
 //获取首页动漫图
 app.get('/getIndexImg', getIndexImg)
 //获取游戏信息
@@ -74,6 +75,8 @@ app.post('/upload', upload)
 app.post('/talkAi', talkAi)
 //消费记录
 app.post('/monthRecord', monthRecord)
+//签到
+app.get('/signIn', signIn)
 const opt = {
     key: fs.readFileSync('./certs/liaixi.icu.key'),
     cert:  fs.readFileSync('./certs/liaixi.icu_bundle.crt')

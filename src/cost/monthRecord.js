@@ -1,17 +1,16 @@
-const urlib = require('url');
 var mongoose = require('mongoose');
-var querystring = require('querystring');
 var common = require('../mongodb/costMongo');
 const useTool = require("../../utils");
 const moment = require('moment')
 // 获取菜单列表
-function getMenuList(res, month, username) {
-    let date = moment(new Date()).format('YYYY-MM-DD')
-    common.query("cost",{date: date, userName: username },(err,result)=>{
+function getMenuList(res, month, date, userName) {
+    let year = moment(date).year();
+    let formatMonth = month < 10 ? '0' + month : month;
+    common.query("cost",{ date: { $regex: `${year}-${formatMonth}`}, userName },(err,result)=>{
         if (err) {
             res.json({code: 300, data: err});
         } else {
-            res.json({code: 0, data: result});
+            res.json({code: 200, data: result});
         }
     });
 }
@@ -26,7 +25,7 @@ function add(postObj, res, username) {
         if (err) {
             res.json({code: 0, data: err});
         } else {
-            getMenuList(res, postObj.month - 0, username);
+            getMenuList(res, postObj.month - 0, postObj.date,username);
         }
     });
 }
@@ -46,7 +45,7 @@ function modify(postObj, res, username) {
         if (err) {
             res.json({code: 300, data: err});
         } else {
-            getMenuList(res, postObj.month - 0, username);
+            getMenuList(res, postObj.month - 0, postObj.date, username);
         }
     });
 }
@@ -58,7 +57,7 @@ function deleteMenu(postObj, res, username) {
         if (err) {
             res.json({code: 300, data: err});
         } else {
-            getMenuList(res, postObj.month - 0, username);
+            getMenuList(res, postObj.month - 0, postObj.date, username);
         }
     });
 }
@@ -70,16 +69,16 @@ function actionEvent (costType, res, postObj, username) {
             break;
         case 0:
             modify(postObj, res, username);
-            break;
+            break;0
         case 3:
             deleteMenu(postObj, res, username);
             break;
     }
 }
 module.exports = async (req, res) => {
-    let { costType, level, title, date, mack, money, month, type, } = await useTool.postParamsByUrl(req);
+    let { costType, level, title, date, mack, money, month, type, id } = await useTool.postParamsByUrl(req);
     let postObj = {
-        costType, level, title, date, mack, money, month, type,
+        costType, level, title, date, mack, money, month, type, id
     }
     let username = req.headers.username
     console.log('monthRecord', postObj, username);
