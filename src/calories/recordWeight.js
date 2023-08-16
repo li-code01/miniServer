@@ -18,7 +18,7 @@ module.exports = (req, res) => {
             if (err) {
                 res.json({code: 300, data: err});
             } else {
-                res.json({code: 200, data: 0});
+                res.json({code: 200, data: result });
             }
         });
     }

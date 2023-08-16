@@ -15,7 +15,7 @@ const config = {
       '/growth_api/v1/lottery_lucky/dip_lucky?aid=2608&uuid=7011439613199124007',
   },
   cookie:
-    'msToken=BeTEe6fRKvHD1FB4a3YHDbcScbP_VheKPSrSZhMvcEDpmK4hz8TADRq1D6P_9QaOWizYppRuyc4AZcb8SXEprPGOl6pCOV0CsraV7HE6et5qeB2WUYG8siA972Bv0WM=; Path=/; Domain=juejin.cn; Expires=Tue, 22 Aug 2023 08:21:40 GMT; Secure; SameSite=None',
+  '__tea_cookie_tokens_2608=%257B%2522web_id%2522%253A%25227232265166212285987%2522%252C%2522user_unique_id%2522%253A%25227232265166212285987%2522%252C%2522timestamp%2522%253A1683892980433%257D; n_mh=LPIAPfQ7F6Q8wA5hCByBHwhtuwSN8ZcDcNkBK3M_-gA; sid_guard=46305496a5710ea2c6bc9498cf2ed0b5%7C1684720550%7C31536000%7CTue%2C+21-May-2024+01%3A55%3A50+GMT; uid_tt=02b0abaab6f788fd7658facbf8c3f2c0; uid_tt_ss=02b0abaab6f788fd7658facbf8c3f2c0; sid_tt=46305496a5710ea2c6bc9498cf2ed0b5; sessionid=46305496a5710ea2c6bc9498cf2ed0b5; sessionid_ss=46305496a5710ea2c6bc9498cf2ed0b5; sid_ucp_v1=1.0.0-KGZiZjhkZDJkMzZhNjdmN2QzMzNiNmJhNWY1NDhhN2FjMzVhZmEyMjQKFgiumcDA_fUBEKaXq6MGGLAUOAJA8QcaAmxmIiA0NjMwNTQ5NmE1NzEwZWEyYzZiYzk0OThjZjJlZDBiNQ; ssid_ucp_v1=1.0.0-KGZiZjhkZDJkMzZhNjdmN2QzMzNiNmJhNWY1NDhhN2FjMzVhZmEyMjQKFgiumcDA_fUBEKaXq6MGGLAUOAJA8QcaAmxmIiA0NjMwNTQ5NmE1NzEwZWEyYzZiYzk0OThjZjJlZDBiNQ; store-region=cn-sh; store-region-src=uid; _ga=GA1.2.43694735.1685438620; _tea_utm_cache_2608={%22utm_source%22:%22gzh%22}; _ga_S695FMNGPJ=GS1.2.1690527456.2.0.1690527456.60.0.0; csrf_session_id=0b806fcb95a4645c6749b8763cf8d837; msToken=FnW3pP5Z1RlCsAERKNYjdOltWCobAg66Zj3FoNt4G4vZ8qOT7iag6eOu-bkbiQKukIunNP2CxH3VAtXG_0kCE1cbcA1De9hpEC70qkYPzVN6YBRWT7tv5Wf5jAfL2G4='
 };
 
 /*---------------掘金-----------------*/
@@ -23,18 +23,21 @@ const config = {
 // 签到
 const checkIn = async () => {
   let str = '';
-  let { error } = await getTodayCheckStatus();
-  if (error) return error;
+  let { check } = await getTodayCheckStatus();
+  if (check) {
+    return '掘金已经登录过了';
+  }
   const { cookie, baseUrl, apiUrl } = config;
   let { data } = await axios({
     url: baseUrl + apiUrl.checkIn,
     method: 'post',
     headers: { Cookie: cookie },
   });
+  console.log('今日签到结果', data);
   if (data.err_no) {
-    str = '';
+    str = data.err_msg;
   } else {
-    str = `签到成功！当前积分：${data.data.sum_point}`;
+    str = '';
   }
   return str;
 };
@@ -48,10 +51,12 @@ const getTodayCheckStatus = async () => {
     headers: { Cookie: cookie },
   });
   console.log('今日签到状态', data);
+  // ture 已经登录了
   if (data.data.check_in_done) {
-    return { error: true };
+    return { check: true };
   }
-  return { error: false };
+  // 还没登录了
+  return { check: false };
 };
 exports.juejin = async (event, context) => {
   console.log('开始签到-掘金');

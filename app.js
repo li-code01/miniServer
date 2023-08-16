@@ -23,6 +23,7 @@ const editBirthdayRecord = require('./src/birthday/editBirthdayRecord')
 const upload = require('./src/upload/upload')
 const monthRecord = require('./src/cost/monthRecord')
 const signIn = require('./src/daySign/signIn')
+const querySignState = require('./src/daySign/querySignState')
 // 1. 调用 express() 得到一个 app
 const app = express()
 app.all('*', function (req, res, next) {
@@ -75,6 +76,8 @@ app.post('/upload', upload)
 app.post('/talkAi', talkAi)
 //消费记录
 app.post('/monthRecord', monthRecord)
+//查询签到状态
+app.get('/querySignState', querySignState)
 //签到
 app.get('/signIn', signIn)
 const opt = {

@@ -24,10 +24,10 @@ const checkIn = async () => {
   });
   if (data.message == '0') {
     console.log(`签到成功`);
-    str = `签到成功`;
+    str = ``;
   } else {
     console.log(`签到失败${data.message}`);
-    str = ``;
+    str = `签到失败`;
   }
   return str;
 };
