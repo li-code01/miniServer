@@ -16,11 +16,9 @@ function recordSign(res, data) {
 
 // 自动签到
 async function login (res, date) {
-    // const juejinRes = await juejin.juejin();
-    // const bilibiliRes = await bilibili.bilibili();
+    const juejinRes = await juejin.juejin();
+    const bilibiliRes = await bilibili.bilibili();
 
-    const juejinRes = '';
-    const bilibiliRes = '';
     // 签到成功
     if (!juejinRes && !bilibiliRes) {
         let data = {
