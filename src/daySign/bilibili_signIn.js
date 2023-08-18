@@ -8,7 +8,7 @@ const config = {
     signin: '/xlive/web-ucenter/v1/sign/DoSign',
   },
   cookie:
-    "_uuid=FE95ED4F-F8BD-9A52-927F-35F83FA654C489669infoc; buvid3=9ED43FCD-55FB-21A1-A081-0768D7E7FDB492824infoc; b_nut=1660451190; buvid4=7D155B7E-C789-5DDA-11EA-C3E3B2BEEDF892824-022081412-QCKRjuH3b3rYPPPQxqE35g==; LIVE_BUVID=AUTO1616604786204933; buvid_fp_plain=undefined; nostalgia_conf=-1; CURRENT_BLACKGAP=0; i-wanna-go-back=-1; b_ut=5; CURRENT_FNVAL=4048; rpdid=|(u~|ml||lkm0J'uYY)mJu|JR; Hm_lvt_8a6e55dbd2870f0f5bc9194cddf32a02=1672640956; CURRENT_QUALITY=80; b_lsid=F107338DE_1865A7CE3FF; fingerprint=fedd3f0af3c8628a65788ed4aff4b300; SESSDATA=38ca75f8,1692107451,db999*22; bili_jct=78e1d6f17117273caba319d37a4cc121; DedeUserID=4475113; DedeUserID__ckMd5=d1ef8984e0604352; sid=p2za6m42; _dfcaptcha=26819abe0b397ad57504f74736358623; PVID=2; buvid_fp=fedd3f0af3c8628a65788ed4aff4b300",
+    "buvid3=2DDCAA70-7551-8EC7-8B66-3CE8C3610E6433810infoc; b_nut=1683871033; _uuid=211A1555-7E9C-D8A8-7635-68C116B484BC54771infoc; rpdid=|(J~kmkRumml0J'uY)RJu|Rlm; buvid4=2AB82FE8-2CE2-8030-82E8-32DEE3194C8855395-023051213-pS%2FguQaFaWVnYfAFTgcTKQ%3D%3D; DedeUserID=4475113; DedeUserID__ckMd5=d1ef8984e0604352; LIVE_BUVID=AUTO2116847387683008; nostalgia_conf=-1; CURRENT_PID=ae5e0d00-f907-11ed-b015-95ea6644f379; i-wanna-go-back=-1; b_ut=5; FEED_LIVE_VERSION=V8; header_theme_version=CLOSE; buvid_fp_plain=undefined; hit-dyn-v2=1; Hm_lvt_8a6e55dbd2870f0f5bc9194cddf32a02=1686294022,1687752519; home_feed_column=5; CURRENT_BLACKGAP=0; CURRENT_QUALITY=80; bp_article_offset_4475113=823331057260560534; hit-new-style-dyn=1; CURRENT_FNVAL=4048; bp_video_offset_4475113=829526912669843510; fingerprint=a5cdd5215a5cf1f4389e24810ac40d4d; buvid_fp=a5cdd5215a5cf1f4389e24810ac40d4d; innersign=0; b_lsid=1041010724F_18A01638ADF; browser_resolution=1784-960; SESSDATA=399ccbcb%2C1707792417%2Cd4eb6%2A81MWngnmTEHtgB9khwA6H4G6HckCDSQlq4B3DuyJflxav_pBFAkToeIAB-94QAJ76Rkr9qSgAADQA; bili_jct=1c6b7167a23e2730ca4b34ad51c2e12b; sid=6xfvr040; PVID=2",
 };
 
 /*---------------掘金-----------------*/
@@ -23,10 +23,10 @@ const checkIn = async () => {
     headers: { Cookie: cookie },
   });
   if (data.message == '0') {
-    console.log(`签到成功`);
+    console.log(`签到成功-bilibili`);
     str = ``;
   } else {
-    console.log(`签到失败${data.message}`);
+    console.log(`签到失败-bilibili${data.message}`);
     str = `签到失败`;
   }
   return str;
@@ -36,5 +36,4 @@ exports.bilibili = async (event, context) => {
   console.log('开始');
   const res = await checkIn();
   return res;
-  console.log('结束');
 };

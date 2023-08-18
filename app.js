@@ -24,6 +24,7 @@ const upload = require('./src/upload/upload')
 const monthRecord = require('./src/cost/monthRecord')
 const signIn = require('./src/daySign/signIn')
 const querySignState = require('./src/daySign/querySignState')
+const getSignList = require('./src/daySign/getSignList')
 // 1. 调用 express() 得到一个 app
 const app = express()
 app.all('*', function (req, res, next) {
@@ -78,6 +79,8 @@ app.post('/talkAi', talkAi)
 app.post('/monthRecord', monthRecord)
 //查询签到状态
 app.get('/querySignState', querySignState)
+//获取签到记录
+app.get('/getSignList', getSignList)
 //签到
 app.get('/signIn', signIn)
 const opt = {
