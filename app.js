@@ -84,8 +84,8 @@ app.get('/getSignList', getSignList)
 //签到
 app.get('/signIn', signIn)
 const opt = {
-    key: fs.readFileSync('./certs/liaixi.icu.key'),
-    cert:  fs.readFileSync('./certs/liaixi.icu_bundle.crt')
+    key: fs.readFileSync('./certs/my-home.club.key'),
+    cert:  fs.readFileSync('./certs/my-home.club.bundle.crt')
 }
 // 3. 监听端口号，启动 Web 服务
 const server = https.createServer(opt ,app);
