@@ -22,12 +22,13 @@ const checkIn = async () => {
     method: 'get',
     headers: { Cookie: cookie },
   });
+  console.log(`签到bilibili`, data);
   if (data.message == '0') {
     console.log(`签到成功-bilibili`);
     str = ``;
   } else {
     console.log(`签到失败-bilibili${data.message}`);
-    str = `签到失败`;
+    str = data.message;
   }
   return str;
 };
