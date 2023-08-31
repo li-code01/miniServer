@@ -25,6 +25,8 @@ const monthRecord = require('./src/cost/monthRecord')
 const signIn = require('./src/daySign/signIn')
 const querySignState = require('./src/daySign/querySignState')
 const getSignList = require('./src/daySign/getSignList')
+const addSignRecord = require('./src/daySign/addSignRecord')
+
 // 1. 调用 express() 得到一个 app
 const app = express()
 app.all('*', function (req, res, next) {
@@ -83,6 +85,8 @@ app.get('/querySignState', querySignState)
 app.get('/getSignList', getSignList)
 //签到
 app.get('/signIn', signIn)
+//签到补签
+app.post('/addSignRecord', addSignRecord)
 const opt = {
     key: fs.readFileSync('./certs/my-home.club.key'),
     cert:  fs.readFileSync('./certs/my-home.club.bundle.crt')
