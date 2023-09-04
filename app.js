@@ -26,6 +26,8 @@ const signIn = require('./src/daySign/signIn')
 const querySignState = require('./src/daySign/querySignState')
 const getSignList = require('./src/daySign/getSignList')
 const addSignRecord = require('./src/daySign/addSignRecord')
+const getMonthTotal = require('./src/cost/getMonthTotal')
+
 
 // 1. 调用 express() 得到一个 app
 const app = express()
@@ -87,6 +89,8 @@ app.get('/getSignList', getSignList)
 app.get('/signIn', signIn)
 //签到补签
 app.post('/addSignRecord', addSignRecord)
+//获取每月总开销
+app.get('/getMonthTotal', getMonthTotal)
 const opt = {
     key: fs.readFileSync('./certs/my-home.club.key'),
     cert:  fs.readFileSync('./certs/my-home.club.bundle.crt')
